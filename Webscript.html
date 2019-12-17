@@ -1,0 +1,282 @@
+<html>
+<head>
+<title>Webscript BETA</title>
+<style>
+@import url(//cdn.jsdelivr.net/codemirror/3.21.0/codemirror.css);
+@import url(//cloud.typography.com/610186/679542/css/fonts.css);
+
+@font-face {  
+  font-family:'icomoon';
+  src: url("/fonts/iconic.eot");
+  src: url("/fonts/iconic.eot?#iefix") format("embedded-opentype"),
+       url("/fonts/iconic.woff") format("woff"),
+       url("/fonts/iconic.ttf") format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #333;
+  font-family: 'Gotham SSm A', 'Gotham SSm B', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;
+  
+  overflow: hidden;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #999;
+  margin: 0;  
+  padding: 5px 20px;
+  padding-left: 28px;  
+  position: relative;
+  height: 29px;  
+  flex: 0 0 auto;
+}
+
+h2::before {
+  content: '#';
+  padding: 0 8px 0 8px;
+  position: absolute;
+  left: 0;
+  top: 6px;
+  color: #555;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+}
+
+.codepen {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #444;
+}
+
+.codepen > section {
+  height: 33%;
+  max-height: 333%;
+  max-width: 20%;
+  min-width: 20%;
+  flex: 1 0 33%;
+  display: flex;
+  flex-direction: column;
+  cursor: text;
+}
+.code {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+.CodeMirror {
+  width: 100%;
+  max-height: 85%;
+  background: transparent;
+  color: white;
+  line-height: 1;
+  font: 14px Monaco, monospace;
+}
+.CodeMirror-linenumber {
+  color: #343434;
+}
+
+.CodeMirror-gutters {
+  background: transparent;
+  border: 0;
+}
+
+#html {
+  background: linear-gradient(45deg, #1d1f20, #2f3031);
+}
+
+#css {
+  background: linear-gradient(45deg, #1d1f20, #2f3031)
+}
+
+#js {
+  background: linear-gradient(45deg, #1d1f20, #2f3031)    
+}
+
+.box pre       { color: white; }
+.cm-keyword    { color: #ddca7e; }
+.cm-atom       { color: #ddca7e; }
+.cm-number     { color: #d0782a; }
+.cm-unit       { color: #d0782a; }
+.cm-def        { color: #809bbd; }
+.cm-variable   { color: #ddca7e; }
+.cm-variable-2 { color: #809bbd; }
+.cm-property   { color: #9a8297; }
+.cm-operator   { color: #cccccc; }
+.cm-comment    { color: #666666; }
+.cm-string     { color: #96b38a; }
+.cm-string-2   { color: #FFFFFF; }
+.cm-meta       { color: #9a8297; }
+.cm-header     { color: #ff6400; }
+#html .cm-tag  { color: #9a6e35; }
+#css .cm-tag   { color: #ddca7e; }
+.cm-attribute  { color: #ddca7e; }
+.cm-strong     { color: #ddca7e; }
+.cm-em         { color: #ddca7e; }
+.cm-qualifier  { color: #ddca7e; }
+.cm-builtin    { color: #ddca7e; }
+.box-html .cm-atom { color: #96b38a; }
+.box-css .cm-tag { color: #ddca7e; }
+#css, #js{
+  position: absolute;
+  opacity: 1;
+  left: 0%;
+}
+#css{
+  top: 33.5%;
+}
+#js{
+  top: 67%;
+}
+#cover{
+  position: absolute;
+  height: 105%;
+  width: 100%;
+  background: #333;
+  left: 19.02%;
+  top: -10px;
+  z-index: 100;
+  border: solid black 1px;
+  box-shadow: 5px 0px 50px black inset;
+}
+#webframe{
+  position: absolute;
+  top: 1%;
+  height: 95.5%;
+  width: 81%;
+  border: none;
+  background: #555;
+  opacity: 1;
+}
+.dspbox{
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  background: red;
+  display: none;
+}
+</style>
+</head>
+<body>
+<script src="//cdn.jsdelivr.net/codemirror/3.21.0/codemirror.js" type="text/javascript"></script>
+<script src="//cdn.jsdelivr.net/codemirror/3.21.0/mode/xml/xml.js" type="text/javascript"></script>
+<script src="//cdn.jsdelivr.net/codemirror/3.21.0/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+<script src="//cdn.jsdelivr.net/codemirror/3.21.0/mode/javascript/javascript.js" type="text/javascript"></script>
+<script src="//cdn.jsdelivr.net/codemirror/3.21.0/mode/css/css.js" type="text/javascript"></script> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+<div id="cover"> 
+  <iframe id="webframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" allow="autoplay; encrypted-media"></iframe>
+  <textarea id="htmlbox" class="dspbox"></textarea>
+  <textarea id="cssbox" class="dspbox"></textarea>
+  <textarea id="jsbox" class="dspbox"></textarea>
+</div>
+
+<main class="codepen">
+  <section id="html">
+    <h2>HTML</h2>
+    <div class="code">
+      <textarea></textarea>
+    </div>
+  </section>
+  
+  <section id="css">
+    <h2>CSS</h2>
+    <div class="code">
+      <textarea></textarea>
+    </div>
+  </section>
+  
+  <section id="js">
+    <h2>JS</h2>
+    <div class="code">
+      <textarea id="js1"></textarea>
+    </div>
+  </section>   
+</main>
+
+<script type="text/javascript">
+$(function() {  
+  var htmlTextArea = $('#html textarea').text('');
+  
+  CodeMirror.fromTextArea(htmlTextArea[0], {
+    mode: "text/html",
+    theme: 'twilight',
+    lineNumbers: true,
+    lineWrapping: true,
+    autoCloseTags: true,
+    coverGutterNextToScrollbar: true
+  }).on('change', editor => {    document.getElementById("htmlbox").textContent = editor.getValue();
+                             update();
+
+}); 
+  
+  var cssTextArea = $('#css textarea').text('');
+  
+  CodeMirror.fromTextArea(cssTextArea[0], {
+    mode: "text/css",
+    theme: 'twilight',
+    lineNumbers: true,
+    lineWrapping: true
+  }).on('change', editor => {   document.getElementById("cssbox").textContent = editor.getValue();
+    //alert(editor.getValue())
+                                  update();
+}); 
+  
+  var jsTextArea = $('#js textarea').text('');
+  
+  CodeMirror.fromTextArea(jsTextArea[0], {
+    mode: "text/javascript",
+    theme: 'twilight',
+    lineNumbers: true,
+    lineWrapping: true, 
+  }).on('change', editor => { document.getElementById("jsbox").textContent = editor.getValue();
+    //alert(editor.getValue())
+                              update();
+}); 
+});
+
+function update(){
+
+  var x = document.getElementById("webframe");
+var y = (x.contentWindow || x.contentDocument);
+  
+  var frm = document.getElementById("webframe");
+ var htmlb = document.getElementById("htmlbox").textContent;
+  var cssb = document.getElementById("cssbox").textContent;
+  var jsb = document.getElementById("jsbox").textContent;
+
+
+  
+  var myContent = "<body><style>" + cssb + "</style>" + htmlb + "</body>";
+  var scont = '<script type="text/javascript">' + jsb + "</script" + ">";
+
+  
+if (y.document)y = y.document;
+  y.body.innerHTML = myContent;
+  y.head.innerHTML = scont;
+  
+  
+};
+</script>
+</body>
+</html>
